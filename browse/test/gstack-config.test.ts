@@ -138,13 +138,11 @@ describe('gstack-config', () => {
 
   // ─── annotated header ──────────────────────────────────────
   test('first set writes annotated header with docs', () => {
-    run(['set', 'telemetry', 'off']);
+    run(['set', 'proactive', 'true']);
     const content = readFileSync(join(stateDir, 'config.yaml'), 'utf-8');
     expect(content).toContain('# gstack configuration');
     expect(content).toContain('edit freely');
     expect(content).toContain('proactive:');
-    expect(content).toContain('telemetry:');
-    expect(content).toContain('auto_upgrade:');
     expect(content).toContain('skill_prefix:');
     expect(content).toContain('routing_declined:');
     expect(content).toContain('codex_reviews:');
@@ -160,11 +158,11 @@ describe('gstack-config', () => {
   });
 
   test('header does not break get on commented-out keys', () => {
-    run(['set', 'telemetry', 'community']);
-    // Header contains "# telemetry: anonymous" as a comment example.
+    run(['set', 'proactive', 'false']);
+    // Header contains "# proactive: true" as a comment example.
     // get should return the real value, not the comment.
-    const { stdout } = run(['get', 'telemetry']);
-    expect(stdout).toBe('community');
+    const { stdout } = run(['get', 'proactive']);
+    expect(stdout).toBe('false');
   });
 
   test('existing config file is not overwritten with header', () => {

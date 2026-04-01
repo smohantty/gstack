@@ -129,17 +129,17 @@ describe('gstack-relink (#578)', () => {
     expect(output).toContain('setup');
   });
 
-  // Test: gstack-upgrade does NOT get double-prefixed
-  test('does not double-prefix gstack-upgrade directory', () => {
-    setupMockInstall(['qa', 'ship', 'gstack-upgrade']);
+  // Test: gstack-custom does NOT get double-prefixed
+  test('does not double-prefix gstack-custom directory', () => {
+    setupMockInstall(['qa', 'ship', 'gstack-custom']);
     run(`${path.join(installDir, 'bin', 'gstack-config')} set skill_prefix true`);
     run(`${path.join(installDir, 'bin', 'gstack-relink')}`, {
       GSTACK_INSTALL_DIR: installDir,
       GSTACK_SKILLS_DIR: skillsDir,
     });
-    // gstack-upgrade should keep its name, NOT become gstack-gstack-upgrade
-    expect(fs.existsSync(path.join(skillsDir, 'gstack-upgrade'))).toBe(true);
-    expect(fs.existsSync(path.join(skillsDir, 'gstack-gstack-upgrade'))).toBe(false);
+    // gstack-custom should keep its name, NOT become gstack-gstack-custom
+    expect(fs.existsSync(path.join(skillsDir, 'gstack-custom'))).toBe(true);
+    expect(fs.existsSync(path.join(skillsDir, 'gstack-gstack-custom'))).toBe(false);
     // Regular skills still get prefixed
     expect(fs.existsSync(path.join(skillsDir, 'gstack-qa'))).toBe(true);
   });
@@ -199,15 +199,15 @@ describe('gstack-patch-names (#620/#578)', () => {
     expect(readSkillName(path.join(installDir, 'ship'))).toBe('ship');
   });
 
-  test('gstack-upgrade name: not double-prefixed', () => {
-    setupMockInstall(['qa', 'gstack-upgrade']);
+  test('gstack-custom name: not double-prefixed', () => {
+    setupMockInstall(['qa', 'gstack-custom']);
     run(`${path.join(installDir, 'bin', 'gstack-config')} set skill_prefix true`);
     run(`${path.join(installDir, 'bin', 'gstack-relink')}`, {
       GSTACK_INSTALL_DIR: installDir,
       GSTACK_SKILLS_DIR: skillsDir,
     });
-    // gstack-upgrade should keep its name, NOT become gstack-gstack-upgrade
-    expect(readSkillName(path.join(installDir, 'gstack-upgrade'))).toBe('gstack-upgrade');
+    // gstack-custom should keep its name, NOT become gstack-gstack-custom
+    expect(readSkillName(path.join(installDir, 'gstack-custom'))).toBe('gstack-custom');
     // Regular skill should be prefixed
     expect(readSkillName(path.join(installDir, 'qa'))).toBe('gstack-qa');
   });

@@ -24,15 +24,6 @@ CONFIG_HEADER='# gstack configuration — edit freely, changes take effect on ne
 # routing_declined: false   # Set to true to skip the CLAUDE.md routing injection
 #                           # prompt. Set back to false to be asked again.
 #
-# ─── Telemetry ───────────────────────────────────────────────────────
-# telemetry: anonymous      # off | anonymous | community
-#                           #   off       — no data sent, no local analytics
-#                           #   anonymous — counter only, no device ID
-#                           #   community — usage data + stable device ID
-#
-# ─── Updates ─────────────────────────────────────────────────────────
-# auto_upgrade: false       # true = silently upgrade on session start
-# update_check: true        # false = suppress version check notifications
 #
 # ─── Skill naming ────────────────────────────────────────────────────
 # skill_prefix: false       # true = namespace skills as /gstack-qa, /gstack-ship
